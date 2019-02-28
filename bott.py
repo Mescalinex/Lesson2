@@ -21,8 +21,11 @@ plu = ephem.Pluto(datetime.date.today())
 
 def greet_user(bot, update):
     logging.info('Вызван /start')
-    update.message.reply_text('Добро пожаловать, Настас! Введите название планеты: ')
+    update.message.reply_text('Добро пожаловать!')
 
+def planets(bot, update):
+    logging.info('Вызван /planet')
+    update.message.reply_text('Введите название планеты:')
     
 def talk_to_me(bot, update):
     user_text = update.message.text
@@ -51,7 +54,8 @@ def main():
     logging.info('Бот запускается') 
 
     dp = mybot.dispatcher 
-    dp.add_handler(CommandHandler("start", greet_user)) 
+    dp.add_handler(CommandHandler("start", greet_user))
+    dp.add_handler(CommandHandler("planet", planets))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me)) 
     
     mybot.start_polling()  
